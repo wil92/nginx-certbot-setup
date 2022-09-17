@@ -39,7 +39,11 @@ if ! [ -f "$NEW_CERT_FLAG" ]; then
   do
     DOMAINS_ARGS=" $DOMAINS_ARGS -d $DOMAIN_IT"
   done
-  certbot certonly --webroot -w /var/www/certbot $DOMAINS_ARGS
+  certbot certonly --webroot -w /var/www/certbot $DOMAINS_ARGS \
+    --email $EMAIL \
+    --rsa-key-size $RSA_KEY_SIZE \
+    --agree-tos \
+    --force-renewal
 fi
 
 certbot
