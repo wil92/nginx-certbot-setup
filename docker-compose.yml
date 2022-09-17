@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  blog_nginx:
+    image: nginx:1.23.1-alpine
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:${PORT80}:80"
+      - "127.0.0.1:${PORT443}:443"
+    volumes:
+      - ./nginx-config/config:/etc/nginx/conf.d
+      - ./scripts:/scripts
+      - ./certbot-certs:/etc/letsencrypt
+      - ./certbot-config:/var/www/certbot
+    networks:
+      - blogdb
+    entrypoint: "/bin/sh -c 'sh scripts/start_nginx.sh'"
+
+  blog_certbot:
+    image: certbot/certbot:v1.30.0
+    env_file:
+      - .env
+    volumes:
+      - ./scripts:/scripts
+      - ./certbot-certs:/etc/letsencrypt
+      - ./certbot-config:/var/www/certbot
+    entrypoint: "/bin/sh -c 'sh /scripts/start_certbot.sh'"
+
+networks:
+  blogdb:
+    external: true

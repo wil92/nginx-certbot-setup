@@ -1,0 +1,9 @@
+.idea
+.env
+**/nginx.conf
+
+certbot-certs/**/*
+!certbot-certs/.gitkeep
+
+certbot-config/**/*
+!certbot-config/.gitkeep
