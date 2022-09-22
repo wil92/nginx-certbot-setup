@@ -40,7 +40,7 @@ jobs:
       - name: Deploy project with docker in hosting
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: cd ${{ secrets.PROD_BINARY__REMOTE_TARGET }} && ./deploy.sh binary_prod
+          command: cd ${{ secrets.PROD_BINARY__REMOTE_TARGET }} && ./deploy.sh prod_frontend
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           privateKey: ${{ secrets.SERVER_SSH_KEY}}
