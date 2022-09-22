@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # this scripts is needed to generate the initial cert for the nginx configuration.
-
 PATH_CERT="/etc/letsencrypt/live/$DOMAIN"
 NEW_CERT_FLAG="/etc/letsencrypt/nginx.flag"
 
@@ -43,9 +42,8 @@ if ! [ -f "$NEW_CERT_FLAG" ]; then
     fi
   done
 
-  # restart nginx with new certs
-  echo "-restart nginx with new certs"
-  nginx -s reload;
+  # kill nginx to start it few command bellow
+  killall nginx
 fi
 
 # restart nginx every 6h in case the certbot update the certs
