@@ -31,16 +31,56 @@ jobs:
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO"
+          ARGS: "-rltgoDzvO --delete"
           SOURCE: ""
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.PROD_BINARY__REMOTE_TARGET }}
 
+#      - name: Deploy project with docker in hosting
+#        uses: garygrossgarten/github-action-ssh@release
+#        with:
+#          command: cd ${{ secrets.PROD_BINARY__REMOTE_TARGET }} && ./deploy.sh prod_frontend
+#          host: ${{ secrets.REMOTE_HOST }}
+#          username: ${{ secrets.REMOTE_USER }}
+#          privateKey: ${{ secrets.SERVER_SSH_KEY}}
+
+  deploy-prod-api-nginx:
+
+    if: github.ref == 'refs/heads/master'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create env variables file
+        run: |
+          echo "PORT80=${{ secrets.BINARY_PROD_API_PORT80 }}" > .env
+          echo "PORT443=${{ secrets.BINARY_PROD_API_PORT443 }}" >> .env
+          echo 'DOMAINS="${{ secrets.BINARY_PROD_API_DOMAINS }}"' >> .env
+          echo "DOMAIN=${{ secrets.BINARY_PROD_API_DOMAIN }}" >> .env
+          echo "EMAIL=contact@guilledev.com" >> .env
+          echo "BINARY_PROD_PORT_API=${{ secrets.BINARY_PROD_PORT_API }}" >> .env
+          echo "BINARY_PROD_PORT_PODCAST=${{ secrets.BINARY_PROD_PORT_PODCAST }}" >> .env
+
+      - name: Generate nginx.config file
+        run: ./generate_config.sh nginx.binary.api.prod.conf
+
+      - name: Copy project to the hosting
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: ""
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.PROD_BINARY_API__REMOTE_TARGET }}
+
       - name: Deploy project with docker in hosting
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: cd ${{ secrets.PROD_BINARY__REMOTE_TARGET }} && ./deploy.sh prod_frontend
+          command: cd ${{ secrets.PROD_BINARY_API__REMOTE_TARGET }} && ./deploy.sh prod_api
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           privateKey: ${{ secrets.SERVER_SSH_KEY}}
