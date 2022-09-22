@@ -19,6 +19,7 @@ jobs:
           echo "PORT443=${{ secrets.BINARY_PROD_PORT443 }}" >> .env
           echo 'DOMAINS="${{ secrets.BINARY_PROD_DOMAINS }}"' >> .env
           echo "DOMAIN=${{ secrets.BINARY_PROD_DOMAIN }}" >> .env
+          echo "EMAIL=contact@guilledev.com" >> .env
           echo "BINARY_PROD_PORT_API=${{ secrets.BINARY_PROD_PORT_API }}" >> .env
           echo "BINARY_PROD_PORT_BLOG=${{ secrets.BINARY_PROD_PORT_BLOG }}" >> .env
           echo "BINARY_PROD_PORT_DASHBOARD=${{ secrets.BINARY_PROD_PORT_DASHBOARD }}" >> .env
