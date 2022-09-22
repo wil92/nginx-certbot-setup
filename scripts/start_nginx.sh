@@ -24,7 +24,7 @@ if ! [ -f "$NEW_CERT_FLAG" ]; then
 
   # start nginx with dummy certs
   echo "-start nginx with dummy certs"
-  nginx -g "daemon off;" &
+  nginx
   echo "wait 10s for nginx to start"
   sleep 10s
 
