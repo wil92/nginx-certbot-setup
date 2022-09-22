@@ -26,7 +26,3 @@ services:
       - ./certbot-certs:/etc/letsencrypt
       - ./certbot-config:/var/www/certbot
     entrypoint: "/bin/sh -c 'sh /scripts/start_certbot.sh'"
-
-networks:
-  blogdb:
-    external: true

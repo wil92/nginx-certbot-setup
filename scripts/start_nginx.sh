@@ -48,11 +48,10 @@ if ! [ -f "$NEW_CERT_FLAG" ]; then
   nginx -s reload;
 fi
 
-#while :
-#do
-#    sleep 6h
-#    wait $${!};
-#    nginx -s reload;
-#done
+# restart nginx every 6h in case the certbot update the certs
+while : ; do
+  sleep 6h
+  nginx -s reload
+done &
 
 nginx -g "daemon off;"
