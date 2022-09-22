@@ -14,8 +14,8 @@ services:
       - certbot-cert:/etc/letsencrypt
       - certbot-config:/var/www/certbot
     entrypoint: "/bin/sh -c 'sh scripts/start_nginx.sh'"
-    networks:
-      - binary
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   blog_certbot:
     image: certbot/certbot:v1.30.0
@@ -30,7 +30,3 @@ services:
 volumes:
   certbot-cert:
   certbot-config:
-
-networks:
-  binary:
-    external: true
