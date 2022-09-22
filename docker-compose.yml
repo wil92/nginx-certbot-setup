@@ -11,8 +11,8 @@ services:
     volumes:
       - ./nginx-config/config:/etc/nginx/conf.d
       - ./scripts:/scripts
-      - ./certbot-certs:/etc/letsencrypt
-      - ./certbot-config:/var/www/certbot
+      - /etc/letsencrypt
+      - /var/www/certbot
     networks:
       - blogdb
     entrypoint: "/bin/sh -c 'sh scripts/start_nginx.sh'"
@@ -23,6 +23,6 @@ services:
       - .env
     volumes:
       - ./scripts:/scripts
-      - ./certbot-certs:/etc/letsencrypt
-      - ./certbot-config:/var/www/certbot
+      - /etc/letsencrypt
+      - /var/www/certbot
     entrypoint: "/bin/sh -c 'sh /scripts/start_certbot.sh'"
