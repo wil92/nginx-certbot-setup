@@ -13,8 +13,6 @@ services:
       - ./scripts:/scripts
       - /etc/letsencrypt
       - /var/www/certbot
-    networks:
-      - blogdb
     entrypoint: "/bin/sh -c 'sh scripts/start_nginx.sh'"
 
   blog_certbot:
