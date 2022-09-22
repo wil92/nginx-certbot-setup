@@ -24,3 +24,7 @@ services:
       - certbot-cert:/etc/letsencrypt
       - certbot-config:/var/www/certbot
     entrypoint: "/bin/sh -c 'sh /scripts/start_certbot.sh'"
+
+volumes:
+  certbot-cert:
+  certbot-config:
