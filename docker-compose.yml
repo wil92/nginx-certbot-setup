@@ -3,6 +3,7 @@ version: '3'
 services:
   blog_nginx:
     image: nginx:1.23.1-alpine
+    restart: always
     env_file:
       - .env
     ports:
@@ -19,6 +20,7 @@ services:
 
   blog_certbot:
     image: certbot/certbot:v1.30.0
+    restart: always
     env_file:
       - .env
     volumes:
