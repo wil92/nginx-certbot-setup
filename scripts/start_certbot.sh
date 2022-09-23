@@ -46,4 +46,7 @@ if ! [ -f "$NEW_CERT_FLAG" ]; then
     --force-renewal
 fi
 
-certbot
+while : ; do
+  sleep 12h
+  certbot renew
+done
