@@ -4,6 +4,7 @@ on: [ push, pull_request ]
 
 jobs:
 
+  # Deploy frontend
   deploy-prod-nginx:
 
     if: github.ref == 'refs/heads/master'
@@ -37,14 +38,15 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.PROD_BINARY__REMOTE_TARGET }}
 
-#      - name: Deploy project with docker in hosting
-#        uses: garygrossgarten/github-action-ssh@release
-#        with:
-#          command: cd ${{ secrets.PROD_BINARY__REMOTE_TARGET }} && ./deploy.sh prod_frontend
-#          host: ${{ secrets.REMOTE_HOST }}
-#          username: ${{ secrets.REMOTE_USER }}
-#          privateKey: ${{ secrets.SERVER_SSH_KEY}}
+      - name: Deploy project with docker in hosting
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: cd ${{ secrets.PROD_BINARY__REMOTE_TARGET }} && ./deploy.sh prod_frontend
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          privateKey: ${{ secrets.SERVER_SSH_KEY}}
 
+  # Deploy API
   deploy-prod-api-nginx:
 
     if: github.ref == 'refs/heads/master'
