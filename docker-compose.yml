@@ -11,10 +11,7 @@ services:
       - "127.0.0.1:${PORT443}:443"
     volumes:
       - ./nginx-config/config:/etc/nginx/conf.d
-      - ./scripts:/scripts
-      - ${CERTBOT_CERT_PATH}:/etc/letsencrypt
       - certbot-config:/var/www/certbot
-    entrypoint: "/bin/sh -c 'sh scripts/start_nginx.sh'"
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
