@@ -22,6 +22,7 @@ jobs:
           echo "DOMAIN=${{ secrets.ANGEMY_PROD_DOMAIN }}" >> .env
           echo "EMAIL=contact@guilledev.com" >> .env
           echo "ANGEMY_PROD_FRONTEND_PORT=${{ secrets.ANGEMY_PROD_FRONTEND_PORT }}" >> .env
+          echo "CERTBOT_CERT_PATH=${{ secrets.ANGEMY_PROD_CERTBOT_CERT_PATH }}" >> .env
 
       - name: Generate nginx.config file
         run: ./generate_config.sh nginx.angemy.conf

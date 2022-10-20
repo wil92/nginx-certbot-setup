@@ -12,7 +12,7 @@ services:
     volumes:
       - ./nginx-config/config:/etc/nginx/conf.d
       - ./scripts:/scripts
-      - certbot-cert:/etc/letsencrypt
+      - ${CERTBOT_CERT_PATH}:/etc/letsencrypt
       - certbot-config:/var/www/certbot
     entrypoint: "/bin/sh -c 'sh scripts/start_nginx.sh'"
     extra_hosts:
@@ -25,10 +25,9 @@ services:
       - .env
     volumes:
       - ./scripts:/scripts
-      - certbot-cert:/etc/letsencrypt
+      - ${CERTBOT_CERT_PATH}:/etc/letsencrypt
       - certbot-config:/var/www/certbot
     entrypoint: "/bin/sh -c 'sh /scripts/start_certbot.sh'"
 
 volumes:
-  certbot-cert:
   certbot-config:
