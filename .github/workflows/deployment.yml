@@ -7,7 +7,7 @@ jobs:
   # Deploy frontend
   deploy-prod-nginx:
 
-    if: github.ref == 'refs/heads/guilledev'
+    if: github.ref == 'refs/heads/binary'
 
     runs-on: ubuntu-latest
 
@@ -16,12 +16,12 @@ jobs:
 
       - name: Create env variables file
         run: |
-          echo 'DOMAINS="${{ secrets.ANGEMY_PROD_DOMAINS }}"' > .env
-          echo "DOMAIN=${{ secrets.ANGEMY_PROD_DOMAIN }}" >> .env
+          echo 'DOMAINS="${{ secrets.BINARY_PROD_DOMAINS }}"' > .env
+          echo "DOMAIN=${{ secrets.BINARY_PROD_DOMAIN }}" >> .env
           echo "EMAIL=contact@guilledev.com" >> .env
-          echo "ANGEMY_PROD_FRONTEND_PORT=${{ secrets.ANGEMY_PROD_FRONTEND_PORT }}" >> .env
-          echo "CERTBOT_CERT_PATH=${{ secrets.ANGEMY_PROD_CERTBOT_CERT_PATH }}" >> .env
-          echo "CERTBOT_CONF_PATH=${{ secrets.ANGEMY_PROD_CERTBOT_CONF_PATH }}" >> .env
+          echo "BINARY_PROD_FRONTEND_PORT=${{ secrets.BINARY_PROD_FRONTEND_PORT }}" >> .env
+          echo "CERTBOT_CERT_PATH=${{ secrets.BINARY_PROD_CERTBOT_CERT_PATH }}" >> .env
+          echo "CERTBOT_CONF_PATH=${{ secrets.BINARY_PROD_CERTBOT_CONF_PATH }}" >> .env
 
       - name: Copy project to the hosting
         uses: easingthemes/ssh-deploy@v2.1.5
@@ -31,12 +31,12 @@ jobs:
           SOURCE: ""
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.PROD_ANGEMY__REMOTE_TARGET }}
+          TARGET: ${{ secrets.PROD_BINARY__REMOTE_TARGET }}
 
       - name: Deploy project with docker in hosting
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: cd ${{ secrets.PROD_ANGEMY__REMOTE_TARGET }} && ./deploy.sh prod_angemy
+          command: cd ${{ secrets.PROD_BINARY__REMOTE_TARGET }} && ./deploy.sh prod_binary
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           privateKey: ${{ secrets.SERVER_SSH_KEY}}
