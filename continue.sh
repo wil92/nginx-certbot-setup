@@ -1,3 +1,8 @@
 #!/bin/bash
 
+if [ -f .env ]
+then
+  export $(cat .env | xargs)
+fi
+
 sudo rm "$CERTBOT_CERT_PATH/live/$DOMAIN/privkey.pem"
