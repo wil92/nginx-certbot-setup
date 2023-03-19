@@ -6,3 +6,4 @@ then
 fi
 
 sudo rm "$CERTBOT_CERT_PATH/live/$DOMAIN/privkey.pem"
+sudo rm "$CERTBOT_CERT_PATH/live/$DOMAIN/fullchain.pem"
