@@ -112,4 +112,4 @@ docker logs <contaner name>
 
 ## License
 
-The license of this application can be found here [LICENSE.md]()
+The license of this application can be found here [LICENSE.md](./LICENSE)
