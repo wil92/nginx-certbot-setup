@@ -19,7 +19,6 @@ jobs:
           echo 'DOMAINS="${{ secrets.ANGEMY_PROD_DOMAINS }}"' > .env
           echo "DOMAIN=${{ secrets.ANGEMY_PROD_DOMAIN }}" >> .env
           echo "EMAIL=contact@guilledev.com" >> .env
-          echo "ANGEMY_PROD_FRONTEND_PORT=${{ secrets.ANGEMY_PROD_FRONTEND_PORT }}" >> .env
           echo "CERTBOT_CERT_PATH=${{ secrets.ANGEMY_PROD_CERTBOT_CERT_PATH }}" >> .env
           echo "CERTBOT_CONF_PATH=${{ secrets.ANGEMY_PROD_CERTBOT_CONF_PATH }}" >> .env
 

@@ -9,5 +9,5 @@ services:
     volumes:
       - ./scripts:/scripts
       - ${CERTBOT_CERT_PATH}:/etc/letsencrypt
-      - ${CERTBOT_CONF_PATH}:/var/www/certbot
+      - ${CERTBOT_CERT_PATH}:/var/www/certbot
     entrypoint: "/bin/sh -c 'sh /scripts/start_certbot.sh'"
