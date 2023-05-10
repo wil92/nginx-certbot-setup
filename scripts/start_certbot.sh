@@ -1,5 +1,6 @@
 #!/bin/bash
 
+PATH_CERT="/etc/letsencrypt/live/$DOMAIN"
 NEW_CERT_FLAG="/etc/letsencrypt/certbot.flag"
 
 if ! [ -f "$NEW_CERT_FLAG" ]; then
@@ -7,6 +8,27 @@ if ! [ -f "$NEW_CERT_FLAG" ]; then
   touch $NEW_CERT_FLAG
 
   RSA_KEY_SIZE=2048
+
+  # generate dummy certificates
+  echo "-generate dummy certificates"
+  echo "$PATH_CERT/fullchain.pem"
+  mkdir -p "$PATH_CERT"
+  openssl req -x509 -nodes -newkey rsa:$RSA_KEY_SIZE\
+    -days 1\
+    -keyout "$PATH_CERT/privkey.pem" \
+    -out "$PATH_CERT/fullchain.pem" \
+    -subj "/CN=localhost"
+
+  # wait until cert is removed
+  echo "-wait until cert is removed"
+  while : ; do
+    sleep 2s
+    if ! [ -f "$PATH_CERT/privkey.pem" ]
+    then
+      break
+    fi
+    echo "--waiting for certs to be removed"
+  done
 
   # recreate the fresh certificates
   echo "-recreate the fresh certificates"

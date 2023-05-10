@@ -12,6 +12,4 @@ fi
 echo "Starting project $PROJECT_NAME with docker"
 
 echo "Docker container name: $PROJECT_NAME";
-docker-compose --project-name=$PROJECT_NAME build
-docker-compose --project-name=$PROJECT_NAME down
 docker-compose --project-name=$PROJECT_NAME up -d --build

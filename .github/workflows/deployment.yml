@@ -19,7 +19,6 @@ jobs:
           echo 'DOMAINS="${{ secrets.BINARY_PROD_DOMAINS }}"' > .env
           echo "DOMAIN=${{ secrets.BINARY_PROD_DOMAIN }}" >> .env
           echo "EMAIL=contact@guilledev.com" >> .env
-          echo "BINARY_PROD_FRONTEND_PORT=${{ secrets.BINARY_PROD_FRONTEND_PORT }}" >> .env
           echo "CERTBOT_CERT_PATH=${{ secrets.BINARY_PROD_CERTBOT_CERT_PATH }}" >> .env
           echo "CERTBOT_CONF_PATH=${{ secrets.BINARY_PROD_CERTBOT_CONF_PATH }}" >> .env
 
