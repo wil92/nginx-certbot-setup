@@ -15,7 +15,7 @@ fi
 if [ -z "$PROJECT_NAME" ]
 then
   echo "ERROR: Empty project name!"
-  echo "Ex: ./deploy.sh <project-name>"
+  echo "Ex: ./stop.sh <project-name>"
   exit 1
 else
   # save project name in file
@@ -23,4 +23,4 @@ else
 fi
 
 echo "Docker container name: $PROJECT_NAME";
-docker-compose --project-name=$PROJECT_NAME up -d --build
+docker-compose --project-name=$PROJECT_NAME down
