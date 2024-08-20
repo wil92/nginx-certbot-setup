@@ -1,5 +1,6 @@
 .idea
 .env
+.project
 **/nginx.conf
 
 certbot-certs/**/*
