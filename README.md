@@ -98,6 +98,7 @@ sudo service nginx restart
 
 After the nginx was restarted, then you can execute the next command that will allow the certbot docker container to validate and get the new certificates from Let's Encrypt.
 
+
 ```
 ./continue.sh
 ```
